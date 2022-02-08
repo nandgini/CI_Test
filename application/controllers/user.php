@@ -49,12 +49,18 @@ class User extends CI_Controller{
      }
 
      public function login_user(){
-              $this->load->view('layouts/header.php');
-              $this->load->view('layouts/sidebar.php');
-              $this->session->flashdata('message_name');
-              $this->session->set_flashdata('success_msg', 'Welcome to Dashboard, You are Logged in now. ');
-              $this->load->view('members/user_profile.php');
-             $this->load->view('layouts/footer.php');
+         $data['activeAndVerifiedUserCount'] = $this->user_model->active_user();
+         $data['activeAndVerifiedUserCountWithActiveProduct'] = $this->user_model->active_and_attached_product(); 
+         $data['activeProduct'] = $this->user_model->active_product(); 
+         $data['getProductNotAssociatedWithUser'] = $this->user_model->get_product_not_attached_with_user(); 
+         $data['getProductAmountOfActiveProduct'] = $this->user_model->get_amount_of_all_active_attached_products(); 
+         $data['getProductPriceOfActiveProduct'] = $this->user_model->get_price_of_all_active_attached_products(); 
+         $this->load->view('layouts/header.php');
+         $this->load->view('layouts/sidebar.php');
+         $this->session->flashdata('message_name');
+         $this->session->set_flashdata('success_msg', 'Welcome to Dashboard, You are Logged in now. ');
+         $this->load->view('members/user_profile.php', $data);
+         $this->load->view('layouts/footer.php');
      }
  
 }
