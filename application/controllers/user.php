@@ -43,9 +43,7 @@ class User extends CI_Controller{
 
      // after reg redirect to login page
      public function login(){
-
         $this->load->view('layouts/header.php');
-   
         $this->load->view('members/login.php');
         $this->load->view('layouts/footer.php');
      }
