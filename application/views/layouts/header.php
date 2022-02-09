@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      #logout {
+        margin-left: 220px;
+        padding: 30px;
+      }
+    </style>
+    <?php if($this->session->userdata('userEmail')){ ?>
+      <div id="logout">
+        <a href="<?php echo base_url('user/user_logout');?>" >
+          <button type="button" class="btn-primary">Logout</button>
+        </a>
+      </div>
+    <?php  } ?>
     <title>Login Registration</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
