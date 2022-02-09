@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2022 at 02:48 PM
+-- Generation Time: Feb 09, 2022 at 08:50 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -102,7 +102,14 @@ INSERT INTO `user_products` (`id`, `product_id`, `user_id`, `quantity`, `price`,
 (5, 1, 1, 5, '400', '2022-02-08 13:30:29'),
 (6, 2, 1, 5, '500', '2022-02-08 13:30:27'),
 (7, 1, 1, 40, '500', '2022-02-08 13:30:24'),
-(8, 1, 1, 10, '3434', '2022-02-08 13:30:22');
+(8, 1, 1, 10, '3434', '2022-02-08 13:30:22'),
+(10, 1, 3, 6, '200', '2022-02-09 05:01:01'),
+(11, 1, 3, 7, '200', '2022-02-09 05:13:24'),
+(12, 2, 3, 8, '300', '2022-02-09 05:13:34'),
+(13, 3, 3, 9, '300', '2022-02-09 05:13:46'),
+(14, 3, 3, 8, '300', '2022-02-09 05:40:24'),
+(15, 2, 3, 8, '400', '2022-02-09 05:40:40'),
+(16, 3, 3, 6, '200', '2022-02-09 07:46:49');
 
 --
 -- Indexes for dumped tables
@@ -146,7 +153,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_products`
 --
 ALTER TABLE `user_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

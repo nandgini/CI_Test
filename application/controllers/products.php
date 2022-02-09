@@ -8,16 +8,18 @@ class Products extends CI_Controller{
         $this->load->library('session');
     }
 
-     public function index(){
-         $data['products_list'] = $this->products_model->products();
-         $this->load->view('layouts/header.php');
-         $this->load->view('layouts/sidebar.php');
-         $this->load->view('members/products.php', $data);
-         $this->load->view('layouts/footer.php');
-     }
+    // function for to show products list
+    public function index(){
+        $data['products_list'] = $this->products_model->products();
+        $this->load->view('layouts/header.php');
+        $this->load->view('layouts/sidebar.php');
+        $this->load->view('members/products.php', $data);
+        $this->load->view('layouts/footer.php');
+    }
 
-     public function user_products(){
-        $userMail = $this->session->userdata('email'); 
+    //function for add product and price by user
+    public function user_products(){
+        $userMail = $this->session->userdata('userEmail'); 
         $userData = $this->products_model->get_user_data($userMail);  
         $user_id = $userData[0]['id'];
         $user_product = array(
@@ -26,16 +28,14 @@ class Products extends CI_Controller{
             'product_id' =>$this->input->post('product_id'),
             'user_id' =>$user_id
          );
-         if($user_product){
+        if($user_product){
             $this->products_model->insert_user_product($user_product);
             $this->session->set_flashdata('success_msg', 'You have attached product Successfully.');
             redirect('products/index');
-         }
-         else{
+        }
+        else{
             $this->session->set_flashdata('error_msg', 'Error occured, Try again.');
             redirect('products/index');
-         }
+        }
     }
-
-
 }
