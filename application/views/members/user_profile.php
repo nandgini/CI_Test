@@ -32,7 +32,7 @@
                     <tr class="text-center">
                         <td><?php echo $users['id']; ?></td>
                         <td><?php echo $users['name']; ?></td>
-                        <td><?php echo '$' . $users['price']; ?></td>
+                        <td><?php echo '€' . $users['price']; ?></td>
                         <td>
                             <button type="button" data-price="<?php echo $users['price']; ?>" class="btn btn-primary exchangeCurrencyModalButton" data-toggle="modal" data-target="#exchangeCurrencyModal">
                             Exchange Currency
@@ -54,7 +54,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row d-none">
                     <div class="col-md-6 mb-2">
                         <label>Exchange To Currency </label>
                     </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-2">
-                        <label>Amount To Exchange </label>
+                        <label>Amount To Exchange (€) </label>
                     </div>
                     <div class="col-md-6 mb-2">
                         <input class="form-control" type="text" id="amountToExchange" value="" readonly />
@@ -75,10 +75,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-2">
-                        <label>Exchanged Amount </label>
+                        <label>Exchanged Amount ($) </label>
                     </div>
                     <div class="col-md-6 mb-2">
-                        <input class="form-control" type="text" id="exchangedAmount" value="" readonly />
+                        <input class="form-control" type="text" id="exchangedAmountUSD" value="" readonly />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <label>Exchanged Amount (lei) </label>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input class="form-control" type="text" id="exchangedAmountRON" value="" readonly />
                     </div>
                 </div>
             </div>
@@ -101,34 +109,63 @@
         
         $(document).on('click', '.exchangeCurrencyModalButton', function(event){
             $('#amountToExchange').val('');
-            $('#currencySelector').val('');
+            $('#exchangedAmountUSD').val('');
+            $('#exchangedAmountRON').val('');
             let price = $(this).data('price');
-            $('#amountToExchange').val(`$${price}`);
+            $('#amountToExchange').val(price);
             $('#amountToExchange').data('amount', price);
-        });
-
-        $(document).on('change', '#currencySelector', function(event){
             let toCurrency = $(this).val();
-            if(! toCurrency){
-                $('#exchangedAmount').val('');
-                return;
-            }
-            let amountToExchange = $('#amountToExchange').data('amount');
-            console.log(toCurrency, amountToExchange);
-            return;
+            // if(! toCurrency){
+            //     $('#exchangedAmount').val('');
+            //     return;
+            // }
+          
+            let amountToExchange = $('#amountToExchange').data('amount'); 
+            let url = '&symbols=USD,RON&base=EUR';
+             url = `${config.host}latest?access_key=${config.access_key}&symbols=${url}`; 
             $.ajax({
-                url,
+                url : url,
                 type : 'GET',
                 dataType:'json',
                 success : function(response) {
+                    console.log(response.rates);
                     if(response.success){
                         // write the code to exchange the currency
+                        exchangedAmountUSD =  (amountToExchange*response.rates.USD).toFixed(2)
+                        exchangedAmountRON = (amountToExchange*response.rates.RON).toFixed(2);
+                        $('#exchangedAmountUSD').val(exchangedAmountUSD);
+                        $('#exchangedAmountRON').val(exchangedAmountRON);
                     }             
                 },
                 error : function(request,error) {
                 }
             });
         });
+
+        // $(document).on('change', '#currencySelector', function(event){
+        //     let toCurrency = $(this).val();
+        //     if(! toCurrency){
+        //         $('#exchangedAmount').val('');
+        //         return;
+        //     }
+        //     let amountToExchange = $('#amountToExchange').data('amount');
+        //     //console.log(toCurrency, amountToExchange);
+        //     let url = '&symbols=USD,RON&base=EUR';
+        //      url = `${config.host}latest?access_key=${config.access_key}&symbols=${url}`;
+        //     return;
+        //     $.ajax({
+        //         url,
+        //         type : 'GET',
+        //         dataType:'json',
+        //         success : function(response) {
+        //             if(response.success){
+        //                 // write the code to exchange the currency
+        //             }             
+        //         },
+        //         error : function(request,error) {
+        //         }
+        //     });
+        // });
 
         function pouplateAvailableCurrencyExchangeDropdown(){
             let url = `${config.host}symbols?access_key=${config.access_key}`;

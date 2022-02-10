@@ -1,14 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config = array(
-    'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-    'smtp_host' => 'smtp.example.com', 
+    'protocol' => 'smtp',
+    'smtp_host' => '<email host>', // chage it to yours
     'smtp_port' => 587,
-    'smtp_user' => 'no-reply@example.com',
-    'smtp_pass' => '12345!',
-    'smtp_crypto' => 'ssl', //can be 'ssl' or 'tls' for example
-    'mailtype' => 'text', //plaintext 'text' mails or 'html'
-    'smtp_timeout' => '4', //in seconds
+    'smtp_user' => '<email to use>', // change it to yours
+    'smtp_pass' => '<email password>', // change it to yours
+    'mailtype' => 'html',
     'charset' => 'iso-8859-1',
     'wordwrap' => TRUE
 );
