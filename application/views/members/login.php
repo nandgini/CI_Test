@@ -13,9 +13,6 @@
                         <h3 class="panel-title">Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <?php
-                        $error_msg=$this->session->flashdata('error_msg');
-                        if($error_msg){ echo $error_msg; } ?>
                         <form role="form" method="post" action="<?php echo base_url('user/login_user'); ?>">
                             <fieldset>
                                 <div class="form-group">
@@ -26,6 +23,10 @@
                                 </div>
                                 <input class="btn btn-lg btn-success btn-block" type="submit" value="login" name="Login" >
                             </fieldset>
+                            <?php 
+                                echo $this->session->flashdata('error_msg');
+                                unset($_SESSION['error_msg']);
+                            ?>
                         </form>
                         <center><b>You dont have account ?</b> <br></b><a href="<?php echo base_url('user/index'); ?>"> Please Register</a></center><!--for centered text-->
                     </div>
