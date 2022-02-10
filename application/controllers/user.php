@@ -17,8 +17,8 @@ class User extends CI_Controller{
       $this->load->view('layouts/footer.php');
    }
 
-     // function for register sellers (users)
-     // require email verification, 
+   // function for register sellers (users)
+   // require email verification, 
    public function register_user(){
       $user = array(
          'name' =>$this->input->post('name'),
@@ -30,40 +30,25 @@ class User extends CI_Controller{
       $email =$this->input->post('email'); 
       $mail_exist = $this->user_model->email_check($user['email']);
 
-            $config = Array(
-               'protocol' => 'smtp',
-               'smtp_host' => '<email host>', // chage it to yours
-               'smtp_port' => 587,
-               'smtp_user' => '<email to use>', // change it to yours
-               'smtp_pass' => '<email password>', // change it to yours
-               'mailtype' => 'html',
-               'charset' => 'iso-8859-1',
-               'wordwrap' => TRUE
-            );
-            
-            $linkToVerify = base_url('/user/verify_email?token=' . base64_encode($email));
-            
-            $message = "
-               Hi, ".$user['name']."
-               You have been successfully registered. Please follow the link below to complete the registration process.
-               <a href='" . $linkToVerify . "'> CLick here to verify </a>
-            ";
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from('no-reply@gomedsupply.net'); // change it to yours
-            $this->email->to($email);// change it to yours
-            $this->email->subject("Please Verify Your Account");
-            $this->email->message($message);
-            if($this->email->send())
-         {
-            echo 'Email sent.';
-         }
-         else
-         {
+      $linkToVerify = base_url('/user/verify_email?token=' . base64_encode($email));
+      $message = "
+         Hi, ".$user['name']."
+         You have been successfully registered. Please follow the link below to complete the registration process.
+         <a href='" . $linkToVerify . "'> CLick here to verify </a>
+      ";
+      $this->load->config('email');
+      $this->load->library('email', $config);
+      $this->email->set_newline("\r\n");
+      $this->email->from('no-reply@gomedsupply.net'); // change it to yours
+      $this->email->to($email);// change it to yours
+      $this->email->subject("Please Verify Your Account");
+      $this->email->message($message);
+      if($this->email->send()) {
+         echo 'Email sent.';
+      }
+      else {
          show_error($this->email->print_debugger());
-         }
-
-
+      }
 
       if(!$mail_exist){
          $this->user_model->register_user($user);
