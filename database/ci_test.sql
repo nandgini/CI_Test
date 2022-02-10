@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2022 at 08:50 AM
+-- Generation Time: Feb 10, 2022 at 01:42 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -73,7 +73,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `i
 (4, 'test', 'nand@ginilytics.com', '123', 1, '2022-02-08 09:02:23', 0, 'inactive'),
 (5, 'test', 'test@test.com', '111', 1, '2022-02-08 09:04:13', 0, 'inactive'),
 (6, 'ttest', 'test@tge.com', '123', 1, '2022-02-08 11:57:37', 1, 'active'),
-(7, '11', 'superadmin@gmail.com', '12', 1, '2022-02-08 09:11:20', 0, 'inactive');
+(7, '11', 'superadmin@gmail.com', '12', 1, '2022-02-08 09:11:20', 0, 'inactive'),
+(8, 'Test', 'test@gmail.com', '1234', 1, '2022-02-09 09:00:00', 0, 'inactive'),
+(9, 'Nand', 'nandmaithani178@yopmail.com', '123', 1, '2022-02-10 10:38:24', 0, 'inactive'),
+(10, 'Nand', 'nandmaithani177@yopmail.com', '123', 1, '2022-02-10 10:50:48', 0, 'inactive'),
+(11, 'Nand', 'nandmaithani176@yopmail.com', '123', 1, '2022-02-10 11:28:17', 1, 'inactive'),
+(12, 'admin', 'admin901@yopmail.com', '1234', 1, '2022-02-10 11:30:58', 0, 'inactive'),
+(13, 'nand', 'admin902@yopmail.com', '1234', 1, '2022-02-10 12:40:06', 0, 'inactive');
 
 -- --------------------------------------------------------
 
@@ -147,7 +153,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_products`
